@@ -5,7 +5,12 @@
     "rootDir": "./src",
     "strict": true,
     "paths": {
-      "@styles": ["./src/styles"]
+      "@hooks": ["./src/hooks"],
+      "@navigation": ["./src/navigation"],
+      "@pages": ["./src/pages"],
+      "@styles": ["./src/styles"],
+      "@types": ["./src/types"],
+      "@components": ["./src/components"]
     }
   }
 }

@@ -9,10 +9,14 @@ module.exports = function (api) {
           root: ["./src"],
           extensions: [".ios.js", ".android.js", ".js", ".ts", ".tsx", ".json"],
           alias: {
+            "@hooks": "./src/hooks/index",
+            "@pages": "./src/pages/index",
             "@styles": "./src/styles/index",
+            "@components": "./src/components/index",
           },
         },
       ],
+      "nativewind/babel",
     ],
   }
 }

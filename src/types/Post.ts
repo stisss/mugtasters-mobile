@@ -6,6 +6,7 @@ export type Post = {
   }
   coffee: {
     name: string
+    photo: string
   }
   cafe?: {
     name: string
@@ -15,4 +16,18 @@ export type Post = {
     name: string
   }
   createdAt: string
+  comments: {
+    id: string
+    text: string
+    createdAt: string
+    author: {
+      name: string
+      avatar: string
+    }
+  }[]
+  likes: {
+    userId: string
+    userName: string
+  }[]
+  description: string
 }

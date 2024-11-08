@@ -1,28 +1,37 @@
 {
   "expo": {
     "name": "mugtasters-mobile",
-    "slug": "mugtasters-mobile",
+    "slug": "mugtasters",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": ".src/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": ".src/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.mugtasters-mobile"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": ".src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.stissskun.mugtasters"
     },
     "web": {
       "favicon": ".src/assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "bd16ddd9-7c67-4ffe-a15b-a4af71d296c7"
+      }
+    },
+    "owner": "stissskun"
   }
 }

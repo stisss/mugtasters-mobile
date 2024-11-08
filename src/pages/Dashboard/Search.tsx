@@ -2,16 +2,23 @@ import { useState } from "react"
 import { View, StyleSheet } from "react-native"
 import { Searchbar } from "react-native-paper"
 
-const Search = () => {
+interface SearchProps {
+  onSearch: (phrase: string) => void
+}
+
+const Search: React.FC<SearchProps> = ({ onSearch }) => {
   const [searchText, setSearchText] = useState("")
 
   return (
     <View style={styles.container}>
       <Searchbar
         placeholder="Search coffee, café, or roastery..."
-        onChangeText={(text) => setSearchText(text)}
+        onChangeText={setSearchText}
         value={searchText}
         style={styles.input}
+        onSubmitEditing={(e) => {
+          onSearch(e.nativeEvent.text)
+        }}
       />
     </View>
   )

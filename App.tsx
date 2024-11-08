@@ -1,12 +1,88 @@
+import { IconButton, PaperProvider } from "react-native-paper"
 import { createMaterialBottomTabNavigator } from "react-native-paper/react-navigation"
-import { CommonActions, NavigationContainer } from "@react-navigation/native"
-import { StyleSheet, Text, View } from "react-native"
-import { PaperProvider } from "react-native-paper"
+import { createStackNavigator } from "@react-navigation/stack"
+import { NavigationContainer } from "@react-navigation/native"
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
-import Dashboard from "./src/pages/Dashboard"
-import { theme } from "./src/styles"
+import {
+  Dashboard,
+  Profile,
+  SearchResults,
+  CoffeeDetails,
+  MugShot,
+  PostDetails,
+} from "@pages"
+import { theme } from "@styles"
+import { DashboardStackParamList } from "@navigation"
+import { useAlert } from "@hooks"
 
 const Tab = createMaterialBottomTabNavigator()
+const Stack = createStackNavigator<DashboardStackParamList>()
+
+const DashboardStack: React.FC = () => {
+  const { triggerAlert } = useAlert()
+
+  return (
+    <Stack.Navigator initialRouteName="DashboardMain">
+      <Stack.Screen
+        name="DashboardMain"
+        component={Dashboard}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SearchResults"
+        component={SearchResults}
+        options={({ navigation, route }) => ({
+          title: `Search results: ${route.params.search}`,
+          headerLeft: () => (
+            <IconButton icon="arrow-left" onPress={() => navigation.goBack()} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="CoffeeDetails"
+        component={CoffeeDetails}
+        options={({ navigation }) => ({
+          headerTitle: "",
+          headerLeft: () => (
+            <IconButton icon="arrow-left" onPress={() => navigation.goBack()} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="PostDetails"
+        component={PostDetails}
+        options={({ navigation }) => ({
+          headerTitle: "",
+          headerLeft: () => (
+            <IconButton icon="arrow-left" onPress={() => navigation.goBack()} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="MugShot"
+        component={MugShot}
+        options={({ navigation }) => ({
+          headerTitle: "",
+          headerLeft: () => (
+            <IconButton
+              icon="close"
+              onPress={() =>
+                triggerAlert({
+                  message:
+                    "Are you sure you want to exit the MugShot? Your changes will not be saved.",
+                  title: "Exit MugShot?",
+                  onCancel: () => {},
+                  onConfirm: navigation.goBack,
+                  confirmLabel: "Exit",
+                })
+              }
+            />
+          ),
+        })}
+      />
+    </Stack.Navigator>
+  )
+}
 
 export default function App() {
   return (
@@ -22,7 +98,7 @@ export default function App() {
               ),
             }}
           >
-            {() => <Dashboard />}
+            {DashboardStack}
           </Tab.Screen>
           <Tab.Screen
             name="Profile"
@@ -33,23 +109,10 @@ export default function App() {
               ),
             }}
           >
-            {() => (
-              <View>
-                <Text>Profile</Text>
-              </View>
-            )}
+            {Profile}
           </Tab.Screen>
         </Tab.Navigator>
       </PaperProvider>
     </NavigationContainer>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-})
